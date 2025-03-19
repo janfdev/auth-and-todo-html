@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Auth and CRUD Data</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  </head>
+  <body class="bg-gray-100">
+    <section
+      id="authSection"
+      class="flex flex-col gap-3 items-center min-h-screen justify-center"
+    >
+      <!-- Register Section (Default Hidden) -->
+      <section
+        id="registerForm"
+        class="w-full max-w-md bg-white p-6 rounded-lg shadow-md hidden"
+      >
+        <h1 class="text-3xl font-semibold text-center mb-4">Register</h1>
+        <form class="flex flex-col gap-4">
+          <div class="flex flex-col">
+            <label for="registerNama" class="font-medium">Nama</label>
+            <input
+              type="text"
+              id="registerNama"
+              class="border border-gray-300 rounded-md py-2 px-3 focus:outline-blue-500"
+              placeholder="Input your name here..."
+            />
+          </div>
+          <div class="flex flex-col">
+            <label for="registerEmail" class="font-medium">Email</label>
+            <input
+              type="email"
+              id="registerEmail"
+              class="border border-gray-300 rounded-md py-2 px-3 focus:outline-blue-500"
+              placeholder="Input your email here..."
+            />
+          </div>
+          <div class="flex flex-col">
+            <label for="registerPassword" class="font-medium">Password</label>
+            <input
+              type="password"
+              id="registerPassword"
+              class="border border-gray-300 rounded-md py-2 px-3 focus:outline-blue-500"
+              placeholder="Input your password here..."
+            />
+          </div>
+          <button
+            onclick="registerApp()"
+            class="mt-3 bg-blue-500 text-white w-full py-2 rounded-md hover:bg-blue-600 transition"
+          >
+            Register
+          </button>
+          <p class="text-sm text-center">
+            Already have an account?
+            <a
+              id="switchToLogin"
+              class="hover:underline text-blue-500 font-semibold cursor-pointer"
+              >Login</a
+            >
+          </p>
+        </form>
+      </section>
+
+      <!-- Login Section (Default Visible) -->
+      <section
+        id="loginForm"
+        class="w-full max-w-md bg-white p-6 rounded-lg shadow-md"
+      >
+        <h1 class="text-3xl font-semibold text-center mb-4">Login</h1>
+        <form class="flex flex-col gap-4">
+          <div class="flex flex-col">
+            <label for="loginEmail" class="font-medium">Email</label>
+            <input
+              type="email"
+              id="loginEmail"
+              class="border border-gray-300 rounded-md py-2 px-3 focus:outline-blue-500"
+              placeholder="Input your email here..."
+            />
+          </div>
+          <div class="flex flex-col">
+            <label for="loginPassword" class="font-medium">Password</label>
+            <input
+              type="password"
+              id="loginPassword"
+              class="border border-gray-300 rounded-md py-2 px-3 focus:outline-blue-500"
+              placeholder="Input your password here..."
+            />
+          </div>
+          <button
+            onclick="loginApp()"
+            class="mt-3 bg-blue-500 text-white w-full py-2 rounded-md hover:bg-blue-600 transition"
+          >
+            Login
+          </button>
+          <p class="text-sm text-center">
+            Don't have an account?
+            <a
+              id="switchToRegister"
+              class="hover:underline text-blue-500 font-semibold cursor-pointer"
+              >Register</a
+            >
+          </p>
+        </form>
+      </section>
+    </section>
+
+    <!-- Loginned -->
+    <section class="hidden" id="appSection">
+      <h1 class="text-3xl font-semibold text-center mb-4">Loginned</h1>
+      <button onclick="logout()">Logout</button>
+    </section>
+
+    <script src="app.js"></script>
+  </body>
+</html>
