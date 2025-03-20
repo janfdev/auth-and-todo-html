@@ -62,8 +62,6 @@ const logout = () => {
 const showApp = () => {
   document.getElementById("authSection").style.display = "none";
   document.getElementById("appSection").style.display = "block";
-
-  //   loadItems();
 };
 
 const showAuth = () => {
@@ -75,7 +73,12 @@ document.addEventListener("DOMContentLoaded", function () {
   let loggedInUser = localStorage.getItem("loggedInUser");
   if (loggedInUser) {
     showApp();
+    loadTodos();
   } else {
     showAuth();
   }
 });
+
+const addTodo = () => {
+  let todos = JSON.parse(localStorage.getItem("todos")) || [];
+};
