@@ -81,4 +81,121 @@ document.addEventListener("DOMContentLoaded", function () {
 
 const addTodo = () => {
   let todos = JSON.parse(localStorage.getItem("todos")) || [];
+  let task = document.getElementById("todoInput").value.trim();
+
+  let date = new Date().toISOString().split("T")[0];
+
+  if (!task) {
+    alert("Task harus diisi");
+    return;
+  }
+
+  let newTodo = { id: Date.now(), task, date, done: false };
+
+  todos.push(newTodo);
+  localStorage.setItem("todos", JSON.stringify(todos));
+  document.getElementById("todoInput").value = "";
+  loadTodos();
+};
+
+// Load Data dari Local Storage
+const loadTodos = () => {
+  let todos = JSON.parse(localStorage.getItem("todos")) || [];
+  let notDoneList = document.getElementById("notDone");
+  let doneList = document.getElementById("done");
+
+  notDoneList.innerHTML = "";
+  doneList.innerHTML = "";
+
+  todos.forEach((todo) => {
+    let li = document.createElement("li");
+    li.className = `flex items-center justify-between bg-white border-2 ${
+      todo.done ? "border-green-500" : "border-red-500"
+    } rounded-md p-4 mb-2`;
+
+    li.innerHTML = `
+    
+     <div class="flex flex-col gap-2">
+        <h1 class="text-lg capitalize">${todo.task}</h1>
+        <p class="text-gray-500 text-sm">${todo.date}</p>
+      </div>
+      <div class="flex gap-2">
+
+      ${
+        !todo.done
+          ? `
+       <button
+       onclick="moveToDone(${todo.id})"
+        class="bg-green-500 text-white py-1 px-2 rounded-md hover:bg-green-700 transition"
+        >
+        <i class="bx bx-check"></i>
+      </button>
+      `
+          : `
+       <button
+       onclick="undoTodo(${todo.id})"
+        class="bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-700 transition"
+        >
+        <i class="bx bx-undo"></i>
+      </button>
+      `
+      }
+               
+                <button
+                onclick="editTodo(${todo.id})"
+                  class="bg-yellow-500 text-white py-1 px-2 rounded-md hover:bg-yellow-700 transition"
+                >
+                  <i class="bx bxs-pencil"></i>
+                </button>
+                <button
+                onclick="deleteTodo(${todo.id})"
+                  class="bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-700 transition"
+                >
+                  <i class="bx bx-trash"></i>
+                </button>
+      </div>
+    `;
+    todo.done ? doneList.appendChild(li) : notDoneList.appendChild(li);
+  });
+};
+
+// Move to Done
+const moveToDone = (id) => {
+  let todos = JSON.parse(localStorage.getItem("todos")) || [];
+  let todo = todos.find((t) => t.id === id);
+  todo.done = true;
+  localStorage.setItem("todos", JSON.stringify(todos));
+  loadTodos();
+};
+
+// Undo from Done to Not Done
+const undoTodo = (id) => {
+  let todos = JSON.parse(localStorage.getItem("todos"));
+  let todo = todos.find((t) => t.id === id);
+  todo.done = false;
+  localStorage.setItem("todos", JSON.stringify(todos));
+  loadTodos();
+};
+
+const editTodo = (id) => {
+  let todos = JSON.parse(localStorage.getItem("todos"));
+  let todo = todos.find((t) => t.id === id);
+
+  let newTask = prompt("Edit task:", todo.task);
+  if (newTask && newTask.trim() !== "") {
+    todo.task = newTask.trim();
+    localStorage.setItem("todos", JSON.stringify(todos));
+    loadTodos();
+  }
+};
+
+const deleteTodo = (id) => {
+  let todos = JSON.parse(localStorage.getItem("todos"));
+  if (!confirm("Apakah kamu yakin ingin menghapus todo ini?")) {
+    return;
+  }
+  let updatedTodos = todos.filter((todo) => todo.id !== id);
+
+  if (updatedTodos) localStorage.setItem("todos", JSON.stringify(updatedTodos));
+  loadTodos();
 };
