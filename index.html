@@ -10,7 +10,7 @@
       rel="stylesheet"
     />
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Font Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -130,14 +130,7 @@
 
     <!-- Loginned -->
     <section class="p-12 flex w-full flex-col" id="appSection">
-      <div class="w-full justify-between flex">
-        <button
-          onclick="downloadTodo()"
-          class="flex cursor-pointer items-center gap-2 bg-blue-600 rounded-md text-white px-4 py-3"
-        >
-          <i class="bx bx-download text-xl"></i>
-          <span class="hidden md:block">Download Todos</span>
-        </button>
+      <div class="w-full justify-end flex">
         <button
           class="flex cursor-pointer items-center gap-2 bg-red-500 rounded-md text-white px-4 py-3"
           onclick="logout()"
