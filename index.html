@@ -10,6 +10,7 @@
       rel="stylesheet"
     />
 
+    <!-- Sweet Alert -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Font Poppins -->
@@ -130,7 +131,8 @@
 
     <!-- Loginned -->
     <section class="p-12 flex w-full flex-col" id="appSection">
-      <div class="w-full justify-end flex">
+      <div class="w-full justify-between flex" id="wrapper-auth">
+        
         <button
           class="flex cursor-pointer items-center gap-2 bg-red-500 rounded-md text-white px-4 py-3"
           onclick="logout()"

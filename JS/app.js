@@ -75,6 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
   if (loggedInUser) {
     showApp();
     loadTodos();
+    displayUsername();
   } else {
     showAuth();
   }
@@ -191,38 +192,48 @@ const editTodo = (id) => {
 };
 
 const deleteTodo = (id) => {
-  let todos = JSON.parse(localStorage.getItem("todos"));
-  if (!confirm("Apakah kamu yakin ingin menghapus todo ini?")) {
-    return;
+  let todos = JSON.parse(localStorage.getItem("todos")) || []; // Menghindari bug null
+
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      let updatedTodos = todos.filter((todo) => todo.id !== id);
+
+      if (updatedTodos.length !== todos.length) {
+        localStorage.setItem("todos", JSON.stringify(updatedTodos));
+        loadTodos();
+
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your todo has been deleted.",
+          icon: "success",
+        });
+      }
+    }
+  });
+};
+
+function displayUsername() {
+  const wrapper = document.getElementById("wrapper-auth"); // Perbaiki ID
+
+  // Ambil data users dari localStorage dan parsing ke objek
+  let users = JSON.parse(localStorage.getItem("users")) || {};
+
+  const username = users.registerNama || "Guest";
+
+  const usernameElement = document.createElement("h1");
+  usernameElement.classList.add("text-xl", "font-semibold");
+  usernameElement.textContent = `Welcome, ${username}`;
+
+  if (wrapper) {
+    wrapper.prepend(usernameElement);
   }
-  let updatedTodos = todos.filter((todo) => todo.id !== id);
+}
 
-  if (updatedTodos) localStorage.setItem("todos", JSON.stringify(updatedTodos));
-  loadTodos();
-};
-
-// Download
-const downloadTodo = () => {
-  const container = document.getElementById("appSection");
-
-  container.style.backgroundColor = "#ffffff";
-
-  domtoimage
-    .toPng(container, {
-      quality: 1.0,
-      bgcolor: "#ffffff",
-      cacheBust: true,
-      useCORS: true,
-    })
-    .then((dataUrl) => {
-      const link = document.createElement("a");
-      link.download = "my-todo-list.png";
-      link.href = dataUrl;
-      link.click();
-
-      container.style.backgroundColor = "";
-    })
-    .catch((error) => {
-      console.error("Error generating image:", error);
-    });
-};
