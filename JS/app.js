@@ -205,13 +205,22 @@ const deleteTodo = (id) => {
 const downloadTodo = () => {
   const container = document.getElementById("appSection");
 
+  container.style.backgroundColor = "#ffffff";
+
   domtoimage
-    .toPng(container)
+    .toPng(container, {
+      quality: 1.0,
+      bgcolor: "#ffffff",
+      cacheBust: true,
+      useCORS: true,
+    })
     .then((dataUrl) => {
       const link = document.createElement("a");
       link.download = "my-todo-list.png";
       link.href = dataUrl;
       link.click();
+
+      container.style.backgroundColor = "";
     })
     .catch((error) => {
       console.error("Error generating image:", error);
