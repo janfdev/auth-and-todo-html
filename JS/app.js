@@ -221,19 +221,20 @@ const deleteTodo = (id) => {
 };
 
 function displayUsername() {
-  const wrapper = document.getElementById("wrapper-auth"); // Perbaiki ID
+  const wrapper = document.getElementById("wrapper-auth");
 
-  // Ambil data users dari localStorage dan parsing ke objek
-  let users = JSON.parse(localStorage.getItem("users")) || {};
+  let users = JSON.parse(localStorage.getItem("users")) || [];
+  const loggedInUser = localStorage.getItem("loggedInUser");
 
-  const username = users.registerNama || "Guest";
+  let currentUser = users.find((user) => user.registerEmail === loggedInUser);
+
+  const username = currentUser ? currentUser.registerNama : "Guest";
 
   const usernameElement = document.createElement("h1");
-  usernameElement.classList.add("text-xl", "font-semibold");
+  usernameElement.classList.add("md:text-xl", "font-semibold", "text-lg");
   usernameElement.textContent = `Welcome, ${username}`;
 
   if (wrapper) {
     wrapper.prepend(usernameElement);
   }
 }
-
