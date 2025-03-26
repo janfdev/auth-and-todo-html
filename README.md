@@ -1,16 +1,18 @@
 # Auth and TODO with HTML and Local Storage
 
-🚀 A simple page todo with local storage
+🚀 A simple to-do application with authentication, built using local storage.
 
-## 🛠️ Techstack
-- **HTML** - Markup for structuring the webpage
-- **Tailwind CSS** for styling
-- **Javascript** for dynamic functionality
-- **Sweet Alert** for alert looks good
-- **Box Icons** for UI Icon
+## 🛠️ Tech Stack
 
+- **HTML**
+- **Tailwind CSS**
+- **JavaScript**
+- **SweetAlert2**
+- **Box Icons**
 
 ## ♟️ Installation
-1. Clone this repository :
- ```sh
-  git clone https://github.com/janfdev/auth-and-todo-html.git
+
+1. Clone this repository:
+   ```sh
+   git clone https://github.com/janfdev/auth-and-todo-html.git
+   ```
