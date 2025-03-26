@@ -10,7 +10,8 @@
       rel="stylesheet"
     />
 
-    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js"></script>
+
     <!-- Font Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -129,12 +130,19 @@
 
     <!-- Loginned -->
     <section class="p-12 flex w-full flex-col" id="appSection">
-      <div class="w-full justify-end flex">
+      <div class="w-full justify-between flex">
         <button
-          class="flex items-center gap-2 bg-red-500 rounded-md text-white px-4 py-3"
+          onclick="downloadTodo()"
+          class="flex cursor-pointer items-center gap-2 bg-blue-600 rounded-md text-white px-4 py-3"
+        >
+          <i class="bx bx-download text-xl"></i>
+          <span class="hidden md:block">Download Todos</span>
+        </button>
+        <button
+          class="flex cursor-pointer items-center gap-2 bg-red-500 rounded-md text-white px-4 py-3"
           onclick="logout()"
         >
-          <i class="bx bx-log-out"></i>
+          <i class="bx bx-log-out text-xl"></i>
           <span class="hidden md:block">Logout</span>
         </button>
       </div>
@@ -154,7 +162,7 @@
           />
           <button
             onclick="addTodo()"
-            class="bg-blue-500 flex items-center gap-2 text-sm text-white px-3 py-3 md:py-4 md:px-3 rounded-md hover:bg-blue-600 transition"
+            class="bg-blue-500 cursor-pointer flex items-center gap-2 text-sm text-white px-3 py-3 md:py-4 md:px-3 rounded-md hover:bg-blue-600 transition"
           >
             <i class="bx bxs-plus-circle text-2xl md:text-lg"></i>
             <span class="hidden md:block"> Add Todo </span>
@@ -228,14 +236,22 @@
       class="bg-gradient-to-r fixed left-0 bottom-0 right-0 from-blue-500 to-indigo-900 text-white text-center py-4"
     >
       <div class="flex gap-3 items-center justify-center">
-        <span class="flex items-center gap-2 justify-center">
+        <a
+          href="https://github.com/janfdev"
+          target="_blank"
+          class="flex items-center gap-2 justify-center"
+        >
           <i class="bx bxl-github text-xl"></i>
           @janfdev
-        </span>
-        <span class="flex items-center gap-2 justify-center">
+        </a>
+        <a
+          target="_blank"
+          href="https://www.instagram.com/zann.7654?igsh=MXUwb2wzNzU1dGZhcg=="
+          class="flex items-center gap-2 justify-center"
+        >
           <i class="bx bxl-instagram-alt text-xl"></i>
           @zann7654
-        </span>
+        </a>
       </div>
     </footer>
 

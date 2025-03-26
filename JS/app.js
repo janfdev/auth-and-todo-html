@@ -69,6 +69,7 @@ const showAuth = () => {
   document.getElementById("appSection").style.display = "none";
 };
 
+// To Do List
 document.addEventListener("DOMContentLoaded", function () {
   let loggedInUser = localStorage.getItem("loggedInUser");
   if (loggedInUser) {
@@ -126,7 +127,7 @@ const loadTodos = () => {
           ? `
        <button
        onclick="moveToDone(${todo.id})"
-        class="bg-green-500 text-white py-1 px-2 rounded-md hover:bg-green-700 transition"
+        class="bg-green-500 cursor-pointer text-white py-1 px-2 rounded-md hover:bg-green-700 transition"
         >
         <i class="bx bx-check"></i>
       </button>
@@ -134,7 +135,7 @@ const loadTodos = () => {
           : `
        <button
        onclick="undoTodo(${todo.id})"
-        class="bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-700 transition"
+        class="bg-red-500 text-white cursor-pointer py-1 px-2 rounded-md hover:bg-red-700 transition"
         >
         <i class="bx bx-undo"></i>
       </button>
@@ -143,13 +144,13 @@ const loadTodos = () => {
                
                 <button
                 onclick="editTodo(${todo.id})"
-                  class="bg-yellow-500 text-white py-1 px-2 rounded-md hover:bg-yellow-700 transition"
+                  class="bg-yellow-500 cursor-pointer text-white py-1 px-2 rounded-md hover:bg-yellow-700 transition"
                 >
                   <i class="bx bxs-pencil"></i>
                 </button>
                 <button
                 onclick="deleteTodo(${todo.id})"
-                  class="bg-red-500 text-white py-1 px-2 rounded-md hover:bg-red-700 transition"
+                  class="bg-red-500 cursor-pointer text-white py-1 px-2 rounded-md hover:bg-red-700 transition"
                 >
                   <i class="bx bx-trash"></i>
                 </button>
@@ -198,4 +199,21 @@ const deleteTodo = (id) => {
 
   if (updatedTodos) localStorage.setItem("todos", JSON.stringify(updatedTodos));
   loadTodos();
+};
+
+// Download
+const downloadTodo = () => {
+  const container = document.getElementById("appSection");
+
+  domtoimage
+    .toPng(container)
+    .then((dataUrl) => {
+      const link = document.createElement("a");
+      link.download = "my-todo-list.png";
+      link.href = dataUrl;
+      link.click();
+    })
+    .catch((error) => {
+      console.error("Error generating image:", error);
+    });
 };
